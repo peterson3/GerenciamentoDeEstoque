@@ -1,0 +1,36 @@
+{% extends 'produto/base.html' %}
+
+{% block content %}
+
+ <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Registrar Compra de Produto
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+					<form action="/produto/compraRegistrada.html" method = "POST">
+						{% csrf_token %}
+						{{ form.as_table }}
+					<input type="submit" class="btn btn-default" value="Registrar">
+					<button type="reset" class="btn btn-default">Apagar</button>
+				     </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+{% endblock content %}
+
+
+
+</form>

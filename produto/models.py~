@@ -1,0 +1,78 @@
+from __future__ import unicode_literals
+from django.db import models
+import time
+
+# Create your models here.
+
+class Produto (models.Model):
+	#Campos
+	nome = models.CharField(max_length=100)
+	qtd = models.IntegerField(default=0)
+	precoMedio = models.FloatField(default=0)
+
+	def __str__(self):
+		#if (self.precoMedio==0):
+			#return (self.nome + str(self.precoMedio) + "QTD ESTOQUE: "+ str(self.qtd) + " PRECO MEDIO: " + str(self.precoMedio))
+		#	return (self.nome + " " + str(self.qtd))
+		#else:
+			#return (self.nome + str(self.precoMedio) + "QTD ESTOQUE: "+ str(self.qtd) + " PRECO MEDIO: Nao Calculado")
+		if (self.qtd == 0):
+			return (self.nome + " " + str(self.qtd) + "	S/PM")
+		else:
+			if (self.qtd == "qtd"):
+				return (self.nome + " " + "S/QTD" + "	S/PM")
+			else:
+				return "erro"
+
+
+
+	def atualizarEstoque(self, qtdAdd, preco):
+		if (self.qtd==0):
+			self.precoMedio = preco
+			self.qtd = qtdAdd
+		else:
+			x = self.qtd*self.precoMedio
+			y = qtdAdd*preco
+			z = (x+y)/(self.qtd+qtdAdd)
+			precoMedio=z
+
+
+class CompraProduto (models.Model):
+	#Campos
+	produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+	qtd = models.IntegerField()
+	preco = models.FloatField()
+	processado = models.IntegerField(default=-1)
+        processamentoEmExecucao = False
+	#-1 na fila
+	# 0 processando
+	# 1 processado
+
+	def __str__(self):
+		return ('Produto: '+ self.produto.nome + ' Quantidade: '+ str(self.qtd) + ' Preco:'+str(self.preco))
+
+
+
+#    def processarCompra(self):
+ #       while (self.processamentoEmExecucao==True):
+ #           time.sleep(10)
+  #      processamentoEmExecucao=True
+   #     processado = 0
+    #    time.sleep(60)
+ #       self.produto.atualizarEstoque(self.qtd, self.preco)
+  #      processado = 1
+   #     processamentoEmExecucao=False
+    #    return "OK"
+
+	def printSituacao(self):
+		if (self.processado == -1):
+			return "Na Fila"
+		else:
+			if (self.processado == 0):
+				return "Processando"
+			else:
+				return "Processado"
+
+
+
+	

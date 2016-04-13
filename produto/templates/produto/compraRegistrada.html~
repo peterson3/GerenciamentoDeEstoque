@@ -1,0 +1,58 @@
+{% extends 'produto/base.html' %}
+
+{% block content %}
+           <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+							Lista de Registro de Compras
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!--<h2>Bordered Table</h2>-->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Quantidade (un)</th>
+										<th>Preço/Un (R$)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+				
+									{% for registro in registros %}
+										<tr> 
+											<td>{{registro.produto.nome}}</td>
+											<td>{{registro.qtd}}</td>
+											<td>{{registro.preco}}</td>
+										</tr>
+									{% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+               
+                   
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+
+
+{% endblock content %}
+
+<h1>Lista de Registro de Compras</h1>
+<ul>
+{% for registro in registros %}
+	<li> {{ registro }} </li>
+{% endfor %}
+</ul>
+

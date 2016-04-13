@@ -1,0 +1,62 @@
+{% extends 'produto/base.html' %}
+
+{% block content %}
+           <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           Fila de Processamento
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!--<h2>Bordered Table</h2>-->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Quantidade (un)</th>
+										<th>Preço/Un (R$)</th>
+										<th>Processamento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+				
+									{% for processamento in processamentos %}
+										<tr> 
+											<td>{{processamento.produto.nome}}</td>
+											<td>{{processamento.qtd}}</td>
+											<td>{{processamento.preco}}</td>
+											<td>
+											{% if processamento.processado == -1 %}
+											<font color="red"> NA FILA</font>
+											{% endif %}
+											{% if processamento.processado == 0 %}
+											<font color="blue"> PROCESSANDO</font>
+											{% endif %}
+											{% if processamento.processado == 1 %}
+											<font color="green"> PROCESSADO</font>
+											{% endif %}
+											</td>
+										</tr>
+									{% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+               
+                   
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+{% endblock content %}
+
+
